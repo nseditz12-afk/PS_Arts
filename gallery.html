@@ -1,0 +1,58 @@
+<!-- ================= GALLERY PAGE : gallery.html ================= -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Gallery | P.S</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header>
+  <h1>Art Gallery</h1>
+  <nav>
+    <a href="nimisha.html">Home</a>
+    <a href="gallery.html">Gallery</a>
+    <a href="contact.html">Contact</a>
+  </nav>
+</header>
+<section class="section">
+  <h2>Our Collection</h2>
+  <div class="products">
+    <div class="card">     
+<img src="eagle.jpg" alt="Sketch" width="150"height="200">
+      <p>Price: ₹800</p>
+      <button onclick="addToCart('Sketch',800)">Add to Cart</button>
+    </div>
+    <div class="card">
+    
+	<img src="red.jpg"alt="painting"width="200"height="200">
+      <p>Price: ₹2500</p>
+      <button onclick="addToCart('Painting',2500)">Add to Cart</button>
+    </div>
+<div class="card">
+<img src="black.jpg" alt="Sketch" width="150"height="200">
+      <p>Price: ₹800</p>
+      <button onclick="addToCart('Sketch',800)">Add to Cart</button>
+    </div>
+    <div class="card">  
+	<img src="drawing.jpg"alt="painting"width="300"height="200">
+      <p>Price: ₹2500</p>
+      <button onclick="addToCart('Painting',2500)">Add to Cart</button>
+    </div>
+
+    
+  </div>
+
+</section>
+
+<section class="section">
+  <h2>Your Cart</h2>
+  <ul id="cartItems"></ul>
+  <p id="total">Total Amount: ₹0</p>
+  <button onclick="clearCart()">Clear Cart</button>
+</section>
+
+<script src="script.js"></script>
+</body>
+</html>
+

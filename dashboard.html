@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard</title>
+</head>
+<body>
+
+<h1>Dashboard 🛒</h1>
+
+<p id="status"></p>
+
+<button onclick="logout()">Logout</button>
+
+<hr>
+
+<h2>Add Product</h2>
+
+<input id="name" placeholder="Product Name"><br><br>
+<input id="price" placeholder="Price"><br><br>
+<input id="category" placeholder="Category"><br><br>
+<input id="image" placeholder="Image URL"><br><br>
+
+<button onclick="addProduct()">Add Product</button>
+
+<p id="msg"></p>
+
+<script>
+
+// ------------------ CHECK LOGIN ------------------
+const token = localStorage.getItem("token");
+
+if (!token) {
+    alert("Not logged in!");
+    window.location.href = "login.html";
+}
+
+document.getElementById("status").innerText = "Logged in successfully ✅";
+
+
+// ------------------ LOGOUT ------------------
+function logout() {
+    localStorage.removeItem("token");
+    window.location.href = "login.html";
+}
+
+
+// ------------------ ADD PRODUCT ------------------
+async function addProduct() {
+
+    const res = await fetch("http://localhost:3000/api/products/add", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": token
+        },
+        body: JSON.stringify({
+            name: document.getElementById("name").value,
+            price: document.getElementById("price").value,
+            category: document.getElementById("category").value,
+            image: document.getElementById("image").value
+        })
+    });
+
+    const data = await res.json();
+
+    document.getElementById("msg").innerText = data.message;
+
+    // clear inputs after success
+    document.getElementById("name").value = "";
+    document.getElementById("price").value = "";
+    document.getElementById("category").value = "";
+    document.getElementById("image").value = "";
+}
+
+</script>
+
+</body>
+</html>

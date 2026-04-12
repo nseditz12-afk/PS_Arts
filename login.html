@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Login</title>
+</head>
+<body>
+
+<h2>User Login</h2>
+
+<form id="loginForm">
+<input type="email" id="email" placeholder="Email" required>
+<input type="password" id="password" placeholder="Password" required>
+<button type="submit">Login</button>
+</form>
+
+<script>
+document.getElementById("loginForm").addEventListener("submit", async (e) => {
+    e.preventDefault();
+
+    const email = document.getElementById("email").value;
+    const password = document.getElementById("password").value;
+
+    const res = await fetch("http://localhost:3000/api/auth/login", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ email, password })
+    });
+
+    const data = await res.json();
+
+    if (data.token) {
+        localStorage.setItem("token", data.token);
+
+        document.getElementById("msg").innerText = "Login successful ✅";
+
+        // redirect to dashboard (next step)
+        setTimeout(() => {
+            window.location.href = "dashboard.html";
+        }, 1000);
+
+    } else {
+        document.getElementById("msg").innerText = data.message;
+    }
+});
+     
+</script>
+
+</body>
+</html>

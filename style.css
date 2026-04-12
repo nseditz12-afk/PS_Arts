@@ -1,0 +1,12 @@
+<!-- ================= COMMON CSS : style.css ================= -->
+body{margin:0;font-family:Arial;background:#faf7f2}
+header{background:#5a3e2b;color:white;padding:15px;display:flex;justify-content:space-between}
+nav a{color:white;margin-left:15px;text-decoration:none;font-weight:bold}
+.hero{text-align:center;padding:80px;background:#d6b89c}
+.section{padding:40px}
+.products{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:20px}
+.card{background:white;padding:20px;border-radius:8px;text-align:center}
+button{background:#5a3e2b;color:white;border:none;padding:8px 12px;cursor:pointer}
+.contact-form input,.contact-form textarea{width:100%;margin-bottom:10px;padding:10px}
+
+
