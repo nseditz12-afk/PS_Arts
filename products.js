@@ -1,27 +1,34 @@
 /* ================= PRODUCT ROUTES ================= */
 /* file: routes/products.js */
 
-const auth = require('./middleware/auth');
-router.post('/add', auth, async (req, res) => {
-    res.send("Protected route working");
-});
-
 const express = require('express');
 const router = express.Router();
+
+const auth = require('./auth');
 const Product = require('./Product');
 
+/* ================= GET ALL PRODUCTS ================= */
 router.get('/', auth, async (req, res) => {
-    res.json([]);
+    try {
+        const products = await Product.find();
+        res.json(products);
+    } catch (err) {
+        res.status(500).json({ error: err.message });
+    }
 });
-const auth = require('./middleware/auth');
 
+/* ================= ADD PRODUCT ================= */
 router.post('/add', auth, async (req, res) => {
-    res.json({ message: "Product added (protected route working)" });
+    try {
+        const newProduct = new Product(req.body);
+        await newProduct.save();
+        res.json({ message: "Product added successfully" });
+    } catch (err) {
+        res.status(500).json({ error: err.message });
+    }
 });
-const auth = require('./middleware/auth');
-const Product = require('./Product');
 
-// DELETE PRODUCT
+/* ================= DELETE PRODUCT ================= */
 router.delete('/:id', auth, async (req, res) => {
     try {
         await Product.findByIdAndDelete(req.params.id);
@@ -30,5 +37,5 @@ router.delete('/:id', auth, async (req, res) => {
         res.status(500).json({ error: err.message });
     }
 });
-module.exports = router;
 
+module.exports = router;
